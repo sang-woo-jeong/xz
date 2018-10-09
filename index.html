@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>test page</title>
+    <link href="https://fonts.googleapis.com/css?family=Coda:800" rel="stylesheet">
+    <style>
+      * {margin: 0; padding: 0; font-family: 'Coda', cursive;}
+      body {background: black; overflow: hidden;}
+      .textwrap {color:white; position: relative;
+                 animation:textwrap 1s ease infinite alternate;}
+      .textwrap p {text-align: right;}
+      @keyframes textwrap {
+        0% {color:white;}
+        10% {color:white; left:0px;}
+        11% {color:red; left:-5px;}
+        12% {color:darkgreen; left:-10px;}
+        13% {color:white; left:0px;}
+        100% {color:white; left:0px;}
+      }
+      .box {width:99%; height: 150px;
+            position: absolute; top:50%;
+            transform:translate(0%,-50%); font-size: 8em;
+            }
+
+      .box p {position: absolute; color:magenta;
+              opacity:.8; blur:10px; left: -4px;
+              animation: o .1s ease infinite alternate;
+              text-align: center; width:100%; text-align: center;
+              cursor: pointer;}
+              @keyframes o {
+                0% {opacity: 0;}
+                20% {opacity: 1;}
+                100% {opacity: 1;}
+              }
+      .box .noise {color:white; animation:noise .3s ease infinite;}
+      @keyframes noise {
+        0% {margin-left: 0px;}
+        10% {opacity: 1;}
+        15% {opacity: 0;}
+        20% {opacity: 1;}
+        50% {left: 2px;}
+        52% {left: 0}
+        53% {left: -5px}
+        98% {left: -5px;}
+        100% {left: 0px;}
+      }
+      img {position: absolute; left:50%; top:50%; transform:translate(-50%,-50%);}
+      .knife {position: absolute; left:5%; top:90%; transform:translate(-50%,-50%);
+              animation:knife .3s ease infinite alternate;}
+              @keyframes knife {
+                0% {transform:translate(-40%,-40%);}
+                100% {transform:translate(-50%,-50%);}
+              }
+      .mm {width:500px; filter:hue-rotate(0deg) blur(5px); animation:mm ease 1s infinite alternate;}
+      @keyframes mm {
+        0% {transform:translate(-50%,-50%);}
+        80% {transform:translate(-50%,-50%); filter:hue-rotate(-30deg) blur(5px);}
+        81% {transform:translate(-40%,-50%); filter:hue-rotate(-60deg) blur(5px);}
+        82% {transform:translate(-50%,-50%); filter:hue-rotate(0deg) blur(5px);}
+        96% {transform:translate(-50%,-50%); filter:hue-rotate(0deg) blur(5px);}
+        97% {transform:translate(-50%,-50%); filter:hue-rotate(180deg) blur(5px);}
+        98% {transform:translate(-60%,-50%); filter:hue-rotate(90deg) blur(5px);}
+        100% {transform:translate(-50%,-50%); filter:hue-rotate(00deg) blur(5px);}
+      }
+      .heart {width:600px; filter:blur(10px);}
+      .safety {position: absolute; left:-42%; transform: rotateZ(80deg);
+              animation:safety 1s ease infinite alternate; animation-delay: .2s;}
+      .safety2 {position: absolute; left:-45%; transform: rotateZ(70deg);
+                animation:safety 1s ease infinite alternate;}
+                @keyframes safety {
+                  0% {filter:hue-rotate(0deg);}
+                  43% {filter:hue-rotate(0deg); margin-left: 0px;}
+                  44% {filter:hue-rotate(90deg) blur(30px); margin-left: 10px;}
+                  45% {filter:hue-rotate(120deg) blur(30px);}
+                  45% {filter:hue-rotate(0deg); margin-left: 0px;}
+                  100% {filter:hue-rotate(0deg);}
+                }
+        .filterwrap {width:660px; height:660px;
+                    position: absolute; top:50%; left:50%;
+                    transform:translate(-50%,-50%);}
+        .filter{float: left;
+          width:60px; height: 60px; overflow: hidden;
+        }
+        .solid {width:60px; height:60px; background: black;
+                transform:translateX(0%); transition: all ease 1s;}
+    </style>
+  </head>
+  <body>
+
+    <img class="knife" src="1.png"/>
+    <img class="safety" src="2.png"/>
+    <img class="safety2" src="2.png"/>
+    <img class="heart" src="heart.png">
+    <img class="mm" src="mm.png"/>
+    <div class="filterwrap">
+      <div class="filter">
+        <div class="solid"></div>
+      </div>
+    </div>
+    <script>
+      var filterwrap = document.querySelector(".filterwrap");
+      var filter = document.querySelector(".filter");
+      var solid = document.querySelector(".solid");
+      for(var m = 0;m<120;m++){
+        var cfilter = filter.cloneNode(true);
+        filterwrap.appendChild(cfilter);
+      }
+    </script>
+    <div class="textwrap">
+      <p class="wmra">WE MUST REAVEAL ALL</p>
+      <script>
+        var wmra = document.querySelector(".wmra");
+        var textwrap = document.querySelector(".textwrap");
+        var q = 0;
+        var cloneWmra = wmra.cloneNode(true);
+        setInterval(function(){
+          q++;
+          for(var o=0;o<q;o++){
+            if(q>5){
+              textwrap.removeChild(cloneWmra)
+            }
+            var cloneWmra = wmra.cloneNode(true);
+            textwrap.appendChild(cloneWmra);
+
+          }
+        },1000)
+      </script>
+    </div>
+    <div class="box">
+      <p class="backnoise">WHO</p>
+      <p class="noise" onclick="a()">WHO</p>
+      <script>
+        var noise = document.querySelector(".noise");
+        var backnoise = document.querySelector(".backnoise");
+        var sentense = ["WHO","KILLED","Marilyn?"];
+        var i = 0;
+        var x = 0;
+          setInterval(function(){
+            i++;
+            if(i>2){
+              i=0;
+            }
+            for(var o =0;o<sentense.length;o++){
+              if(i%3==1){
+                noise.innerHTML = sentense[i];
+                backnoise.innerHTML = sentense[i];
+              }else if(i%3==2){
+                noise.innerHTML = sentense[i];
+                backnoise.innerHTML = sentense[i];
+              }else if(i%3==0){
+                noise.innerHTML = sentense[i];
+                backnoise.innerHTML = sentense[i];
+              }
+            }
+          },1000)
+
+          function a(){
+            x++;
+            var solid = document.querySelectorAll(".solid");
+
+            if(x%2==1){
+              for(var n=0;n<solid.length;n++){
+                solid[n].style.transform = "translateX(-50%)";
+              }
+            }else if(x%2==0){
+              for(var n=0;n<solid.length;n++){
+                solid[n].style.transform = "translateX(0%)";
+              }
+            }
+          }
+      </script>
+    </div>
+  </body>
+</html>
